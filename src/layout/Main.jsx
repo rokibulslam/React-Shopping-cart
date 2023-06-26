@@ -3,11 +3,11 @@ import { Outlet } from 'react-router-dom'
 
 const Main = () => {
   return (
-      <div>
-          <Navbar />
-          <Outlet />
+    <div className="px-10">
+      <Navbar />
+      <Outlet />
     </div>
-  )
+  );
 }
 
 export default Main
