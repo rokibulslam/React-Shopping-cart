@@ -17,8 +17,13 @@ const Home = () => {
     filteredData = filteredData.filter((item) => {
       const itemName = item.name.toLowerCase();
       const itemPrice = item.price.toLowerCase();
+      const itemDescription = item.description.toLowerCase();
       const searchInput = searchString.toLowerCase();
-      return itemName.includes(searchInput) || itemPrice.includes(searchInput);
+      return (
+        itemName.includes(searchInput) ||
+        itemPrice.includes(searchInput) ||
+        itemDescription.includes(searchInput)
+      );
     });
   }
   console.log(data)
