@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    cart:[]
+  cart: [],
+  subTotal:0,
+  discount: 0,
+  total:0
 }
 
 const cartSlice = createSlice({
@@ -21,6 +24,12 @@ const cartSlice = createSlice({
           .filter((product) => product.id !== selectedProduct.id)
           .push(selectedProduct);
       }
+       if (selectedProduct && selectedProduct.name === "Coca-Cola") {
+         const discount =
+           Math.floor(selectedProduct.quantity / 6) *
+           parseFloat(selectedProduct.price.substring(1));
+         state.discount = state.discount + discount;
+       }
     },
     removeFromCart: (state, action) => {
       if (action.payload.quantity > 1) {
