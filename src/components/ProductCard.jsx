@@ -1,7 +1,9 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cartSlice';
 
 const ProductCard = ({ item }) => {
-    
+    const dispatch = useDispatch()
   return (
     <div className="w-[518px] h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center">
       {/* Image Div */}
@@ -39,6 +41,7 @@ const ProductCard = ({ item }) => {
           {/* Cart */}
           <div className="mr-10 space-x-4">
             <img
+              onClick={()=>dispatch(addToCart(item))}
               className="w-[28] h-[26] cursor-pointer"
               src="/src/assets/small-cart.png"
               alt=""

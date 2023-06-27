@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { search } from '../features/searchSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const cart=useSelector(state=>state.cart.cart)
   const dispatch=useDispatch()
   return (
     <nav className=" mx-auto flex flex-wrap flex-col md:flex-row items-center py-10">
@@ -25,6 +26,7 @@ const Navbar = () => {
 
       {/* Icons */}
       <ul className="flex items-center justify-center space-x-10 list-none">
+        {/* Favourite */}
         <li className="relative">
           <img
             className="w-[51px] h-[43px]"
@@ -35,6 +37,7 @@ const Navbar = () => {
             8
           </span>
         </li>
+        {/* Profile */}
         <li className="relative">
           <img
             className="w-[51px] h-[51px]"
@@ -42,15 +45,18 @@ const Navbar = () => {
             alt=""
           />
         </li>
+        {/* Cart */}
         <li className="relative">
-          <img
-            className="w-[51px] h-[43px]"
-            src="/src/assets/cart.png"
-            alt=""
-          />
-          <span className="absolute right-[-15px] top-[-30px] h-[24px] w-[24px] bg-red-400 rounded-[100%] text-sm flex justify-center items-center">
-            8
-          </span>
+          <Link to="/cart">
+            <img
+              className="w-[51px] h-[43px]"
+              src="/src/assets/cart.png"
+              alt=""
+            />
+            <span className="absolute right-[-15px] top-[-30px] h-[24px] w-[24px] bg-red-400 rounded-[100%] text-sm flex justify-center items-center">
+              {cart.length}
+            </span>
+          </Link>
         </li>
       </ul>
     </nav>
