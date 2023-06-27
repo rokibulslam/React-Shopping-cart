@@ -11,6 +11,7 @@ export default {
         },
         black: "#000",
         darkslategray: "#474747",
+        lightGray:"#82828B",
         gray: "#949494",
         salmon: {
           100: "#ff7979",

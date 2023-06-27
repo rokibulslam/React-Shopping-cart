@@ -1,52 +1,98 @@
-import React from 'react'
+
 
 const Cart = () => {
   return (
-    <div className="h-[113px] grid grid-cols-4 items-start">
-      <div className='flex justify-center items-center space-x-5'>
-        {/* Image */}
-        <img className="w-[80px] h-[80px]" src="/src/assets/mango.jpg" alt="" />
-        {/* Food */}
-        <div className="text-darkslategray space-y-3">
-          {/* Name */}
-          <h1 className="text-xl font-bold">Sweetest® Mango</h1>
-          {/* Code */}
-          <p className="text-base font-light">Product code: 239JU13</p>
-        </div>
-      </div>
-      {/* Quantity */}
-      <div className="flex flex-col justify-center items-center space-y-3">
-        {/* plus */}
-        <div className="flex justify-center items-center space-x-3">
-          {" "}
+    <div>
+      {/* Cart Items */}
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start">
+        <div className="flex justify-center items-start space-x-5 flex-1">
+          {/* Image */}
           <img
-            className="w-[24px] h-[24px]"
-            src="/src/assets/Minus.png"
+            className="w-[80px] h-[80px]"
+            src="/src/assets/mango.jpg"
             alt=""
           />
-          {/* Quantity  */}
-          <p>2</p>
-          {/* Minus */}
-          <img
-            className="w-[24px] h-[24px]"
-            src="/src/assets/Plus.png"
-            alt=""
-          />
-        </div>
-        {/* Remainning */}
-        <div>
-          <div className=" w-[98px] h-6 text-sm text-white mb-8">
-            <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px]">
-              <span>Only</span>
-              <span>{` 5 `}</span>
-              <span>left</span>
-            </div>
+          {/* Food */}
+          <div className="text-darkslategray space-y-3">
+            {/* Name */}
+            <h1 className="text-xl font-bold">Sweetest® Mango</h1>
+            {/* Code */}
+            <p className="text-base font-light pt-3">Product code: 239JU13</p>
           </div>
         </div>
+        <div className="flex justify-around">
+          {/* Quantity */}
+          <div className="flex flex-col justify-center items-center space-y-3">
+            {/* plus */}
+            <div className="flex justify-center items-center space-x-3">
+              {" "}
+              <img
+                className="w-[24px] h-[24px]"
+                src="/src/assets/Minus.png"
+                alt=""
+              />
+              {/* Quantity  */}
+              <p>2</p>
+              {/* Minus */}
+              <img
+                className="w-[24px] h-[24px]"
+                src="/src/assets/Plus.png"
+                alt=""
+              />
+            </div>
+            {/* Remainning */}
+            <div>
+              <div className=" w-[98px] h-6 text-sm text-white mb-8">
+                <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px]">
+                  <span>Only</span>
+                  <span>{` 5 `}</span>
+                  <span>left</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Price</p>
+          {/* delete  */}
+          <img
+            className="w-[24px] h-[24px]"
+            src="/src/assets/delete.png"
+            alt=""
+          />
+        </div>
       </div>
-      <p>Price</p>
-      {/* delete  */}
-      <img className="w-[24px] h-[24px]" src="/src/assets/delete.png" alt="" />
+      {/* Cart Calculation  */}
+      {/* Subtotal  */}
+      <div>
+        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+          <p></p>
+          <p className="font-bold text-xl ">Subtotal</p>
+          <p className="text-lightGray font-bold">
+            <span>£</span>
+            <span>4.70</span>
+          </p>
+        </div>
+        {/* Discount */}
+        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+          <p></p>
+          <p className="font-bold text-xl ">Discount</p>
+          <p className="text-lightGray font-bold">
+            <span>£</span>
+            <span>4.70</span>
+          </p>
+        </div>
+        {/* Total */}
+        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+          <p></p>
+          <p className="font-bold text-xl ">Total</p>
+          <p className="text-lightGray font-bold">
+            <span>£</span>
+            <span>4.70</span>
+          </p>
+          <button className="h-[25px] md:h-[50px] w-[100px] md:w-[187px] rounded-lg border-0 bg-[#7FD287] text-white font-bold md:text-base">
+            Checkout
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
