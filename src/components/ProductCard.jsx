@@ -18,7 +18,7 @@ const ProductCard = ({ item }) => {
         </p>
         {/* Quantity */}
         <div className=" w-[98px] h-6 text-sm text-white mb-8">
-          {item.available <= 5 ? (
+          {item.available < 10 ? (
             <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px]">
               <span>Only</span>
               <span>{item.available}</span>
