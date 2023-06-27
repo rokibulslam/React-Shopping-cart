@@ -1,13 +1,12 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <nav className=" mx-auto flex flex-wrap flex-col md:flex-row items-center py-10">
       {/* Name */}
-      <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <Link to="/" className="flex title-font items-center text-gray-900 mb-4 md:mb-0 no-underline text-black font-bold">
         GROCERIES
-      </a>
+      </Link>
       {/* Search */}
       <div className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center h-[40px] border-gray-900">
         <input className="outline-0" placeholder="Search" type="text" />
