@@ -14,7 +14,7 @@ const ProductCard = ({ item }) => {
         <h3 className="font-bold text-xl my-10">{item.name}</h3>
         {/* paragraph */}
         <p className="text-base mb-20">
-          {item.description.split(/\s+/).slice(0, 20).join(" ")}
+          {item.description.split(/\s+/).slice(0, 10).join(" ")}
         </p>
         {/* Quantity */}
         <div className=" w-[98px] h-6 text-sm text-white mb-8">

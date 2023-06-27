@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { useGetProductsQuery } from "../APIs/productApi";
 import ProductCard from "../components/ProductCard";
+import { useSelector } from "react-redux";
 
 
 
 const Home = () => {
-  const [category, setCategory]=useState("all")
+  const [category, setCategory] = useState("all")
+  const searchString = useSelector(state => state.search.searchText)
+  console.log(searchString)
   const { data, isError, isFetching, isLoading } = useGetProductsQuery({
     category
   });
+  let filteredData = data;
+  if (searchString) {
+    filteredData = filteredData.filter((item) => {
+      const itemName = item.name.toLowerCase();
+      const itemPrice = item.price.toLowerCase();
+      const searchInput = searchString.toLowerCase();
+      return itemName.includes(searchInput) || itemPrice.includes(searchInput);
+    });
+  }
+  console.log(data)
   const activeClass =
     "rounded-11xl bg-limegreen-200 shadow-[5px_5px_20px_rgba(181,_181,_181,_0.2)] box-border w-[100px] md:w-[188px] h-[30px] md:h-[59px] border-[1px] border-solid border-silver-100 flex justify-center items-center cursor-pointer md:text-5xl m-3 text-white";
   const inActiveClass="rounded-11xl bg-white shadow-[5px_5px_20px_rgba(181,_181,_181,_0.2)] box-border w-[100px] md:w-[188px] h-[30px] md:h-[59px] border-[1px] border-solid border-silver-100 flex justify-center items-center cursor-pointer md:text-5xl m-3"
@@ -17,10 +30,10 @@ const Home = () => {
     AllData= <p>Loading .......</p>
   } else if (isError) {
     AllData=<p>Something Went Wrong !!</p>
-  } else if (data && !isLoading && !isError) {
+  } else if (!filteredData.length) {AllData=<p>Data not found</p>} else if (data && !isLoading && !isError) {
     AllData = (
       <>
-        {data?.map((item, index) => (
+        {filteredData?.map((item, index) => (
           <ProductCard key={index} item={item} />
         ))}
       </>
@@ -28,7 +41,7 @@ const Home = () => {
   }
   // See more functionality for description 
   return (
-    <div className="space-y-8 mx-10">
+    <div className="space-y-8 mx-10 my-10">
       {/* Filter */}
       <div className="flex md:flex-row flex-col justify-center md:justify-start items-center">
         {/* All Items */}

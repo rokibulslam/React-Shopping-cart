@@ -1,15 +1,26 @@
 import { Link } from 'react-router-dom';
+import { search } from '../features/searchSlice';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
+  const dispatch=useDispatch()
   return (
     <nav className=" mx-auto flex flex-wrap flex-col md:flex-row items-center py-10">
       {/* Name */}
-      <Link to="/" className="flex title-font items-center text-gray-900 mb-4 md:mb-0 no-underline text-black font-bold">
+      <Link
+        to="/"
+        className="flex title-font items-center text-gray-900 mb-4 md:mb-0 no-underline text-black font-bold"
+      >
         GROCERIES
       </Link>
       {/* Search */}
       <div className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center h-[40px] border-gray-900">
-        <input className="outline-0" placeholder="Search" type="text" />
+        <input
+          onKeyUp={(e) => dispatch(search(e.target.value))}
+          className="outline-0"
+          placeholder="Search"
+          type="text"
+        />
       </div>
 
       {/* Icons */}
