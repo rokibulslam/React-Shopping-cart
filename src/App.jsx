@@ -4,8 +4,6 @@ import router from './routes/router';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
-  
-
   return (
     <div>
       <Toaster />
@@ -13,5 +11,4 @@ function App() {
     </div>
   );
 }
-
 export default App

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart, removeFromCart } from "../features/cartSlice";
 
 
+
 const Cart = () => {
   const dispatch = useDispatch()
   // Cart Slice Query
@@ -17,10 +18,11 @@ const Cart = () => {
   // toFixed(2)
   const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
   const discountWithDeci = discountForCocaCola + discountCoffee;
+  const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
+  const discount = parseFloat(discountWithDeci).toFixed(2);
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
     // Cart Calculation
-  const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
-  const discount=parseFloat(discountWithDeci).toFixed(2)
+  
   const total=parseFloat(totalWithDeci).toFixed(2)
   return (
     <div>
