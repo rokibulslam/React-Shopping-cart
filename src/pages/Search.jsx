@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import {  useProductListQuery } from '../APIs/productApi';
 import ProductCard from '../components/ProductCard';
+import Loader from '../components/Loader';
 
 const Search = () => {
   const searchString = useSelector(state => state.search.searchText)
@@ -24,7 +25,14 @@ const Search = () => {
 
   let AllData = null;
   if (isLoading || isFetching) {
-    AllData= <p>Loading .......</p>
+    AllData = (
+      <>
+        <Loader />
+        <Loader />
+        <Loader />
+        <Loader />
+      </>
+    );
   } else if (isError) {
     AllData=<p>Something Went Wrong !!</p>
   } else if (!filteredData.length) {AllData=<p>Data not found</p>} else if (data && !isLoading && !isError) {

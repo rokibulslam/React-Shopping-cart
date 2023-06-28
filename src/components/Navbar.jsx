@@ -17,7 +17,7 @@ const Navbar = () => {
         GROCERIES
       </Link>
       {/* Search */}
-      <div className="flex items-center text-base justify-between h-[40px] border-gray-900 lg:w-4/6 rounded-81xl shadow-lg mx-10">
+      <div className="flex items-center text-base justify-between h-[60px] border-gray-900 lg:w-4/6 rounded-81xl shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]  mx-10">
         <input
           required
           onKeyUp={(e) => dispatch(search(e.target.value))}
@@ -25,16 +25,15 @@ const Navbar = () => {
           placeholder="Search"
           type="text"
         />
-        <button
-          className='bg-inherit border-0'>
+      
           <Link to="/search">
             <img
-              className="w-[20px] pr-3 cursor-pointer"
+              className="w-[20px] mr-3 cursor-pointer p-3 rounded-full hover:bg-slate-100 hover:shadow-lg"
               src="/src/assets/search.png"
               alt=""
             />
           </Link>
-        </button>
+      
       </div>
 
       {/* Icons */}
@@ -46,8 +45,8 @@ const Navbar = () => {
             src="/src/assets/Icon.png"
             alt=""
           />
-          <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-red-400 rounded-[100%] md:text-sm text-[10px] flex justify-center items-center">
-            8
+          <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-red-400 rounded-[100%] md:text-sm text-[10px] flex justify-center items-center text-white">
+            0
           </span>
         </li>
         {/* Profile */}
@@ -62,11 +61,11 @@ const Navbar = () => {
         <li className="relative">
           <Link to="/cart">
             <img
-              className="w-[25px] h-[25px] md:w-[51px] md:h-[43px]"
+              className="w-[25px] h-[25px] md:w-[51px] md:h-[43px] text-dodgerblue"
               src="/src/assets/cart.png"
               alt=""
             />
-            <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-red-400 rounded-[100%] md:text-sm text-[10px] flex justify-center items-center">
+            <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-dodgerblue rounded-[100%] md:text-sm text-[10px] flex justify-center items-center text-white">
               {cart.length}
             </span>
           </Link>
