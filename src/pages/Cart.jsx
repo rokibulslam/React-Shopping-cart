@@ -11,11 +11,13 @@ const Cart = () => {
   // const subTotal = useSelector((state) => state.cart.subTotal);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const discountCoffee = useSelector((state) => state.cart.discountedCoffee);
-  const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
-  const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
-  const discount = useSelector(
+  const discountForCocaCola = useSelector(
     (state) => state.cart.discountForCocacola
   );
+  const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
+  const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
+  const discountWithDeci = discountForCocaCola + discountCoffee
+  const discount=parseFloat(discountWithDeci).toFixed(2)
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount)
   const total=parseFloat(totalWithDeci).toFixed(2)
   return (
