@@ -3,6 +3,7 @@ import { useGetProductsQuery } from "../APIs/productApi";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addCoffee } from "../features/cartSlice";
+import Loader from "../components/Loader";
 
 
 
@@ -24,7 +25,14 @@ const Home = () => {
   const inActiveClass="rounded-11xl bg-white shadow-[5px_5px_20px_rgba(181,_181,_181,_0.2)] box-border w-[100px] md:w-[188px] h-[30px] md:h-[59px] border-[1px] border-solid border-silver-100 flex justify-center items-center cursor-pointer md:text-5xl m-3"
   let AllData = null;
   if (isLoading || isFetching) {
-    AllData= <p>Loading .......</p>
+    AllData = (
+      <>
+        <Loader />
+        <Loader />
+        <Loader />
+        <Loader />
+      </>
+    );
   } else if (isError) {
     AllData=<p>Something Went Wrong !!</p>
   } else if (!data.length) {AllData=<p>Data not found</p>} else if (data && !isLoading && !isError) {
@@ -33,6 +41,7 @@ const Home = () => {
         {data?.map((item, index) => (
           <ProductCard key={index} item={item} />
         ))}
+       
       </>
     );
   }
