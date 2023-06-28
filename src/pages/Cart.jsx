@@ -4,21 +4,23 @@ import { addToCart, deleteFromCart, removeFromCart } from "../features/cartSlice
 
 const Cart = () => {
   const dispatch = useDispatch()
+  // Cart Slice Query
   const cart = useSelector(state => state.cart.cart)
   const discountedProducts = useSelector(
     (state) => state.cart.discountedProduct
   );
-  // const subTotal = useSelector((state) => state.cart.subTotal);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const discountCoffee = useSelector((state) => state.cart.discountedCoffee);
   const discountForCocaCola = useSelector(
     (state) => state.cart.discountForCocacola
   );
+  // toFixed(2)
   const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
+  const discountWithDeci = discountForCocaCola + discountCoffee;
+  const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
+    // Cart Calculation
   const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
-  const discountWithDeci = discountForCocaCola + discountCoffee
   const discount=parseFloat(discountWithDeci).toFixed(2)
-  const totalWithDeci = parseFloat(subTotal) - parseFloat(discount)
   const total=parseFloat(totalWithDeci).toFixed(2)
   return (
     <div>
