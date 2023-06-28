@@ -1,12 +1,24 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart } from '../features/cartSlice';
 import minus from '../assets/Minus.png'
 import plus from "../assets/Plus.png";
 import deletePic from "../assets/delete.png";
+import { toast } from 'react-hot-toast';
 const CartItem = ({item}) => {
     const dispatch = useDispatch()
+  const cart = useSelector(state => state.cart.cart)
+  const Product = cart.find(product => product.id === item.id)
+  const handleAddToCart = (cartItem) => {
+    if (parseInt(cartItem.quantity) > parseInt(Product.available-1)) {
+      console.log(cartItem.quantity, Product.quantity);
+      return toast.error("You don't have enough product");
+    } else {
+      dispatch(addToCart(cartItem));
+      console.log("conditions");
+    }
     
+  }
   return (
     <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] pt-5">
       <div className="flex justify-between px-16 md:justify-center items-start flex-1 gap-x-10">
@@ -36,7 +48,7 @@ const CartItem = ({item}) => {
             <p>{item.quantity}</p>
             {/* Plus */}
             <img
-              onClick={() => dispatch(addToCart(item))}
+              onClick={() => handleAddToCart(item)}
               className="w-[24px] h-[24px] cursor-pointer"
               src={plus}
               alt=""
