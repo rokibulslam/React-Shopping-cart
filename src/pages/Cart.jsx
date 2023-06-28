@@ -8,7 +8,14 @@ const Cart = () => {
   const discountedProducts = useSelector(
     (state) => state.cart.discountedProduct
   );
-  const subTotal = useSelector((state) => state.cart.subTotal);
+  // const subTotal = useSelector((state) => state.cart.subTotal);
+  const cartTotal = useSelector((state) => state.cart.cartTotal);
+  const discountCoffee = useSelector((state) => state.cart.discountedCoffee);
+  let subTotal = cartTotal + discountCoffee
+  const discount = useSelector(
+    (state) => state.cart.discountForCocacola
+  );
+    let total=subTotal-discount
   return (
     <div>
       {/* Cart Items */}
@@ -29,7 +36,9 @@ const Cart = () => {
               {/* Name */}
               <h1 className="text-xl font-bold">{item.name}</h1>
               {/* Code */}
-              <p className="text-base font-light pt-3">Product Code: {item.id}</p>
+              <p className="text-base font-light pt-3">
+                Product Code: {item.id}
+              </p>
             </div>
           </div>
           <div className="flex justify-around">
@@ -68,7 +77,7 @@ const Cart = () => {
             <p>{item.price}</p>
             {/* delete  */}
             <img
-              onClick={()=>dispatch(deleteFromCart(item))}
+              onClick={() => dispatch(deleteFromCart(item))}
               className="w-[24px] h-[24px]"
               src="/src/assets/delete.png"
               alt=""
@@ -104,7 +113,7 @@ const Cart = () => {
               <div className="flex justify-center items-center space-x-3">
                 {" "}
                 <img
-                  onClick={() => dispatch(removeFromCart(item))}
+                  // onClick={() => dispatch(removeFromCart(item))}
                   className="w-[24px] h-[24px] cursor-pointer"
                   src="/src/assets/Minus.png"
                   alt=""
@@ -113,7 +122,7 @@ const Cart = () => {
                 <p>{item.quantity}</p>
                 {/* Plus */}
                 <img
-                  onClick={() => dispatch(addToCart(item))}
+                  // onClick={() => dispatch(addToCart(item))}
                   className="w-[24px] h-[24px] cursor-pointer"
                   src="/src/assets/Plus.png"
                   alt=""
@@ -157,7 +166,7 @@ const Cart = () => {
           <p className="font-bold text-xl ">Discount</p>
           <p className="text-lightGray font-bold">
             <span>£</span>
-            <span>4.70</span>
+            <span>{discount}</span>
           </p>
         </div>
         {/* Total */}
@@ -166,7 +175,7 @@ const Cart = () => {
           <p className="font-bold text-xl ">Total</p>
           <p className="text-lightGray font-bold">
             <span>£</span>
-            <span>4.70</span>
+            <span>{total}</span>
           </p>
           <button className="h-[25px] md:h-[50px] w-[100px] md:w-[187px] rounded-lg border-0 bg-[#7FD287] text-white font-bold md:text-base">
             Checkout
