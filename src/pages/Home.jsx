@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../APIs/productApi";
 import ProductCard from "../components/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCoffee } from "../features/cartSlice";
 
 
 
@@ -12,6 +13,11 @@ const Home = () => {
   const { data, isError, isFetching, isLoading } = useGetProductsQuery({
     category
   });
+  const dispatch= useDispatch()
+  useEffect(() => {
+    const coffee = data?.find((item) => item.name === "Coffee");
+    dispatch(addCoffee(coffee))
+  },[data, isLoading, isFetching, isError])
   let filteredData = data;
   if (searchString) {
     filteredData = filteredData.filter((item) => {
