@@ -8,7 +8,6 @@ const initialState = {
   discountForCocacola: 0,
   discountedCoffee: 0,
   cartTotal: 0,
-  total: 0,
 };
 
 const cartSlice = createSlice({

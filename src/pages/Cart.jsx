@@ -11,11 +11,13 @@ const Cart = () => {
   // const subTotal = useSelector((state) => state.cart.subTotal);
   const cartTotal = useSelector((state) => state.cart.cartTotal);
   const discountCoffee = useSelector((state) => state.cart.discountedCoffee);
-  let subTotal = cartTotal + discountCoffee
+  const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
+  const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
   const discount = useSelector(
     (state) => state.cart.discountForCocacola
   );
-    let total=subTotal-discount
+  const totalWithDeci = parseFloat(subTotal) - parseFloat(discount)
+  const total=parseFloat(totalWithDeci).toFixed(2)
   return (
     <div>
       {/* Cart Items */}
