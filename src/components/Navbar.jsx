@@ -3,7 +3,9 @@ import { search } from '../features/searchSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
-  const cart=useSelector(state=>state.cart.cart)
+  const cart = useSelector(state => state.cart.cart)
+  const searchText = useSelector((state) => state.search.searchText);
+  console.log(searchText)
   const dispatch=useDispatch()
   return (
     <nav className=" mx-auto flex flex-col md:flex-row items-center py-10 justify-center">
@@ -15,14 +17,24 @@ const Navbar = () => {
         GROCERIES
       </Link>
       {/* Search */}
-      <div className="flex items-center text-base justify-end h-[40px] border-gray-900 lg:w-4/6 rounded-81xl shadow-lg mx-10">
+      <div className="flex items-center text-base justify-between h-[40px] border-gray-900 lg:w-4/6 rounded-81xl shadow-lg mx-10">
         <input
+          required
           onKeyUp={(e) => dispatch(search(e.target.value))}
-          className="h-full w-4/6   border-0 outline-0"
+          className="h-full w-4/6   border-0 outline-0 ms-5"
           placeholder="Search"
           type="text"
         />
-        <img className="w-[20px] pr-3" src="/src/assets/search.png" alt="" />
+        <button
+          className='bg-inherit border-0'>
+          <Link to="/search">
+            <img
+              className="w-[20px] pr-3 cursor-pointer"
+              src="/src/assets/search.png"
+              alt=""
+            />
+          </Link>
+        </button>
       </div>
 
       {/* Icons */}

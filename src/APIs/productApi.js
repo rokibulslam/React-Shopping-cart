@@ -5,15 +5,18 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://uxdlyqjm9i.execute-api.eu-west-1.amazonaws.com",
   }),
-  tagTypes: ["Products"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: ({ category }) => ({
         url: `/s?category=${category}`,
       }),
-      providesTags: ["Products"],
+    }),
+    productList: builder.query({
+      query: () => ({
+        url: "/s?category=all",
+      }),
     }),
   }),
 });
 
-export const { useGetProductsQuery} = productApi;
+export const { useGetProductsQuery, useProductListQuery} = productApi;
