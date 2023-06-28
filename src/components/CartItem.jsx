@@ -20,7 +20,7 @@ const CartItem = ({item}) => {
     
   }
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] pt-5">
+    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] p-5">
       <div className="flex justify-between px-16 md:justify-center items-start flex-1 gap-x-10">
         {/* Image */}
         <img className="w-[80px] h-[80px]" src={item.img} alt="" />

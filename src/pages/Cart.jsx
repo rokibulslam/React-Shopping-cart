@@ -41,7 +41,7 @@ const Cart = () => {
       {/* Cart Calculation  */}
       {/* Subtotal  */}
       <div>
-        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+        <div className="grid grid-cols-3 md:grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
           <p></p>
           <p className="font-bold text-xl ">Subtotal</p>
           <p className="text-lightGray font-bold">
@@ -50,7 +50,7 @@ const Cart = () => {
           </p>
         </div>
         {/* Discount */}
-        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+        <div className="grid grid-cols-3 md:grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid  ">
           <p></p>
           <p className="font-bold text-xl ">Discount</p>
           <p className="text-lightGray font-bold">
@@ -59,7 +59,7 @@ const Cart = () => {
           </p>
         </div>
         {/* Total */}
-        <div className="grid grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid ">
+        <div className="grid grid-cols-3 md:grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid">
           <p></p>
           <p className="font-bold text-xl ">Total</p>
           <p className="text-lightGray font-bold">

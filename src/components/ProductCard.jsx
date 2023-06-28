@@ -5,23 +5,24 @@ import { toast } from 'react-hot-toast';
 import smallCart from '../assets/small-cart.png'
 import smallLove from '../assets/small-love.png'
 const ProductCard = ({ item }) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
+
   return (
-    <div className="w-[400px] h-[300px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center">
+    <div className="w-[300px] h-[240px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center px-5">
       {/* Image Div */}
       <div>
         <img
-          className="h-[150px] w-[150px] md:h-[200px] md:w-[200px]"
+          className="h-[100px] w-[100px] md:h-[200px] md:w-[200px]"
           src={item.img}
           alt=""
         />
       </div>
       {/* Content */}
-      <div className="h-full">
+      <div className="flex flex-col items-stretch">
         {/* header */}
         <h3 className="font-bold text-xl my-5 md:my-10">{item.name}</h3>
         {/* paragraph */}
-        <p className="text-base mb-20">
+        <p className="text-base mb-5 lg:mb-20">
           {item.description.split(/\s+/).slice(0, 10).join(" ")}
         </p>
         {/* Quantity */}
@@ -41,20 +42,20 @@ const ProductCard = ({ item }) => {
         {/* cart */}
         <div className="flex">
           {/* Price */}
-          <div className="flex-1">
-            <b className="text-xl">{item.price}</b>
+          <div className="md:flex-1">
+            <b className="md:text-xl mr-5 md:mr-0">{item.price}</b>
           </div>
           {/* Cart */}
-          <div className="mr-10 space-x-4">
+          <div className="md:mr-10 space-x-4">
             <img
               onClick={() => { dispatch(addToCart(item)); toast.success("Added To Cart")}}
-              className="w-[28] h-[26] cursor-pointer"
+              className="w-[18px] md:w-[28px] h-[18px] md:h-[26px] cursor-pointer"
               src={smallCart}
               alt=""
             />
             {/* Favourite */}
             <img
-              className="w-[28] h-[26] cursor-pointer"
+              className="w-[18px]md:w-[28px] h-[18px] md:h-[26px] cursor-pointer"
               src={smallLove}
               alt=""
             />

@@ -60,18 +60,14 @@ const Home = () => {
         {/* Drinks */}
         <button
           onClick={() => setCategory("drinks")}
-          className={`${
-            category === "drinks" ? activeClass : inActiveClass
-          }`}
+          className={`${category === "drinks" ? activeClass : inActiveClass}`}
         >
           Drinks
         </button>
         {/* Fruits */}
         <button
           onClick={() => setCategory("fruit")}
-          className={`${
-            category === "fruit" ? activeClass : inActiveClass
-          }`}
+          className={`${category === "fruit" ? activeClass : inActiveClass}`}
         >
           Fruits
         </button>
@@ -85,7 +81,7 @@ const Home = () => {
       </div>
       <h1 className="t text-darkslategray text-[32px] ">Trending Items</h1>
       {/* Product Card */}
-      <div className="py-5 grid grid-cols-1 justify-items-center lg:grid-cols-2 gap-5">
+      <div className="py-5 grid grid-cols-1 lg:grid-cols-2 justify-items-center gap-5">
         {AllData}
       </div>
     </div>

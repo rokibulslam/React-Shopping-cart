@@ -11,7 +11,7 @@ const Navbar = () => {
   console.log(searchText)
   const dispatch=useDispatch()
   return (
-    <nav className=" mx-auto flex flex-col md:flex-row items-center py-10 justify-center">
+    <nav className=" mx-auto flex flex-col lg:flex-row items-center py-10 justify-center">
       {/* Name */}
       <Link
         to="/"
@@ -20,7 +20,7 @@ const Navbar = () => {
         <h1>GROCERIES</h1>
       </Link>
       {/* Search */}
-      <div className="flex items-center text-base justify-between h-[60px] border-gray-900 lg:w-4/6 rounded-2xl shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]  mx-10">
+      <div className="flex items-center text-base justify-between h-[60px] border-gray-900 w-full lg:w-4/6 rounded-2xl shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] mx-2 md:mx-10">
         <input
           required
           onKeyUp={(e) => dispatch(search(e.target.value))}
@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
 
       {/* Icons */}
-      <ul className="flex items-center justify-center space-x-10 list-none mt-[50px] md:mt-0">
+      <ul className="flex items-center justify-center space-x-10 list-none mt-[50px] lg:mt-0">
         {/* Favourite */}
         <li className="relative">
           <img
