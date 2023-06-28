@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../features/cartSlice";
+import { addToCart, deleteFromCart, removeFromCart } from "../features/cartSlice";
 
 
 const Cart = () => {
@@ -8,6 +8,7 @@ const Cart = () => {
   const discountedProducts = useSelector(
     (state) => state.cart.discountedProduct
   );
+  const subTotal = useSelector((state) => state.cart.subTotal);
   return (
     <div>
       {/* Cart Items */}
@@ -67,6 +68,7 @@ const Cart = () => {
             <p>{item.price}</p>
             {/* delete  */}
             <img
+              onClick={()=>dispatch(deleteFromCart(item))}
               className="w-[24px] h-[24px]"
               src="/src/assets/delete.png"
               alt=""
@@ -146,7 +148,7 @@ const Cart = () => {
           <p className="font-bold text-xl ">Subtotal</p>
           <p className="text-lightGray font-bold">
             <span>£</span>
-            <span>4.70</span>
+            <span>{subTotal}</span>
           </p>
         </div>
         {/* Discount */}
