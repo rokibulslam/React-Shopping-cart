@@ -1,12 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { addToCart, deleteFromCart, removeFromCart } from '../features/cartSlice';
 
-const CartItem = ({item}) => {
-    const dispatch = useDispatch()
-    
+const CartItemDiscount = ({item}) => {
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]">
+    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start">
       <div className="flex justify-around md:justify-center items-start space-x-5 flex-1 gap-x-10">
         {/* Image */}
         <img className="w-[80px] h-[80px]" src="/src/assets/mango.jpg" alt="" />
@@ -23,22 +19,7 @@ const CartItem = ({item}) => {
         <div className="flex flex-col justify-center items-center space-y-3">
           {/* Minus */}
           <div className="flex justify-center items-center space-x-3">
-            {" "}
-            <img
-              onClick={() => dispatch(removeFromCart(item))}
-              className="w-[24px] h-[24px] cursor-pointer"
-              src="/src/assets/Minus.png"
-              alt=""
-            />
-            {/* Quantity  */}
             <p>{item.quantity}</p>
-            {/* Plus */}
-            <img
-              onClick={() => dispatch(addToCart(item))}
-              className="w-[24px] h-[24px] cursor-pointer"
-              src="/src/assets/Plus.png"
-              alt=""
-            />
           </div>
           {/* Remainning */}
           <div>
@@ -57,15 +38,12 @@ const CartItem = ({item}) => {
         </div>
         <p>{item.price}</p>
         {/* delete  */}
-        <img
-          onClick={() => dispatch(deleteFromCart(item))}
-          className="w-[24px] h-[24px]"
-          src="/src/assets/delete.png"
-          alt=""
-        />
+        <div>
+          <p className="bg-dodgerblue text-white px-3 py-1 rounded-2xl text-center w-10">free</p>
+        </div>
       </div>
     </div>
   );
 }
 
-export default CartItem
+export default CartItemDiscount
