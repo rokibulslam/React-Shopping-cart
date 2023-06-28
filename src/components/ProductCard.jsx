@@ -2,7 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cartSlice';
 import { toast } from 'react-hot-toast';
-
+import smallCart from '../assets/small-cart.png'
+import smallLove from '../assets/small-love.png'
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch()
   return (
@@ -48,13 +49,13 @@ const ProductCard = ({ item }) => {
             <img
               onClick={() => { dispatch(addToCart(item)); toast.success("Added To Cart")}}
               className="w-[28] h-[26] cursor-pointer"
-              src="/src/assets/small-cart.png"
+              src={smallCart}
               alt=""
             />
             {/* Favourite */}
             <img
               className="w-[28] h-[26] cursor-pointer"
-              src="/src/assets/small-love.png"
+              src={smallLove}
               alt=""
             />
           </div>

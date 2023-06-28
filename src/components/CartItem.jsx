@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart } from '../features/cartSlice';
-
+import minus from '../assets/Minus.png'
+import plus from "../assets/Plus.png";
+import deletePic from "../assets/delete.png";
 const CartItem = ({item}) => {
     const dispatch = useDispatch()
     
@@ -9,7 +11,7 @@ const CartItem = ({item}) => {
     <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] pt-5">
       <div className="flex justify-between px-16 md:justify-center items-start flex-1 gap-x-10">
         {/* Image */}
-        <img className="w-[80px] h-[80px]" src="/src/assets/mango.jpg" alt="" />
+        <img className="w-[80px] h-[80px]" src={item.img} alt="" />
         {/* Food */}
         <div className="text-darkslategray space-y-3">
           {/* Name */}
@@ -27,7 +29,7 @@ const CartItem = ({item}) => {
             <img
               onClick={() => dispatch(removeFromCart(item))}
               className="w-[24px] h-[24px] cursor-pointer"
-              src="/src/assets/Minus.png"
+              src={minus}
               alt=""
             />
             {/* Quantity  */}
@@ -36,7 +38,7 @@ const CartItem = ({item}) => {
             <img
               onClick={() => dispatch(addToCart(item))}
               className="w-[24px] h-[24px] cursor-pointer"
-              src="/src/assets/Plus.png"
+              src={plus}
               alt=""
             />
           </div>
@@ -63,7 +65,7 @@ const CartItem = ({item}) => {
           <img
             onClick={() => dispatch(deleteFromCart(item))}
             className="w-[24px] h-[24px]"
-            src="/src/assets/delete.png"
+            src={deletePic}
             alt=""
           />
         </div>

@@ -47,6 +47,5 @@ export default {
   },
   corePlugins: {
     preflight: false,
-  },
-  plugins: [require("daisyui")],
+  }
 };

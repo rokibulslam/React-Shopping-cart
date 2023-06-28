@@ -1,4 +1,4 @@
-
+import smallLove from '../assets/small-love.png'
 
 const Loader = () => {
   return (
@@ -62,7 +62,7 @@ const Loader = () => {
             {/* Favourite */}
             <img
               className="w-[28] h-[26] cursor-pointer"
-              src="/src/assets/small-love.png"
+              src={smallLove}
               alt=""
             />
           </div>
