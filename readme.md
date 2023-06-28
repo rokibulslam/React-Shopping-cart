@@ -31,7 +31,8 @@ Clone the Repository & go to the folder and run these command:
 * Write something on search bar & click on search button. It will take you to search page and show you the result. Search will work on keypress.
 * See All Products by default
 * Can see products by category
-* Add to cart products
+* Add to cart products. If enough products not available you can not add to cart.
+* Remove product & delete products from cart.
 * Responsive UI
 * If an item has 10 or more items available, show it as “Available” on the UI as well or
 else will show the exact number of items available
