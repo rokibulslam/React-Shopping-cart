@@ -24,12 +24,13 @@ const Cart = () => {
   const discount = parseFloat(discountWithDeci).toFixed(2);
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
     // Cart Calculation
-  
-  const total=parseFloat(totalWithDeci).toFixed(2)
+  console.log(cart)
+  const total = parseFloat(totalWithDeci).toFixed(2)
+  const sortedCart = [...cart].sort((a, b) => a.cartPosition - b.cartPosition);
   return (
     <div className="flex flex-col  gap-5 md:ms-[100px]">
       {/* Cart Items */}
-      {cart.map((item, index) => (
+      {sortedCart.map((item, index) => (
         <CartItem key={index} item={item} />
       ))}
       {/* Cart for Discounted Items */}

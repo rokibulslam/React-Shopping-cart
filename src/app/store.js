@@ -4,6 +4,7 @@ import searchSlice from "../features/searchSlice";
 import cartSlice from "../features/cartSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; 
+import cartCounterMiddleware from "../middilware/cartCounterMiddleware";
 
 // Persist for cart slice
 const cartPersistConfig = {
@@ -19,7 +20,7 @@ const store = configureStore({
     cart: persistedCartReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productApi.middleware),
+    getDefaultMiddleware().concat(productApi.middleware).concat(cartCounterMiddleware),
 });
 
 const persistedStore = persistStore(store);
