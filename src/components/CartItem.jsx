@@ -6,8 +6,8 @@ const CartItem = ({item}) => {
     const dispatch = useDispatch()
     
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]">
-      <div className="flex justify-around md:justify-center items-start space-x-5 flex-1 gap-x-10">
+    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] pt-5">
+      <div className="flex justify-between px-16 md:justify-center items-start flex-1 gap-x-10">
         {/* Image */}
         <img className="w-[80px] h-[80px]" src="/src/assets/mango.jpg" alt="" />
         {/* Food */}
@@ -55,14 +55,18 @@ const CartItem = ({item}) => {
             )}
           </div>
         </div>
-        <p>{item.price}</p>
+        <div className="flex justify-end">
+          <p>{item.price}</p>
+        </div>
         {/* delete  */}
-        <img
-          onClick={() => dispatch(deleteFromCart(item))}
-          className="w-[24px] h-[24px]"
-          src="/src/assets/delete.png"
-          alt=""
-        />
+        <div className='flex justify-center'>
+          <img
+            onClick={() => dispatch(deleteFromCart(item))}
+            className="w-[24px] h-[24px]"
+            src="/src/assets/delete.png"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   );

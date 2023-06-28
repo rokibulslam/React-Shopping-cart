@@ -17,11 +17,11 @@ const Navbar = () => {
         GROCERIES
       </Link>
       {/* Search */}
-      <div className="flex items-center text-base justify-between h-[60px] border-gray-900 lg:w-4/6 rounded-81xl shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]  mx-10">
+      <div className="flex items-center text-base justify-between h-[60px] border-gray-900 lg:w-4/6 rounded-2xl shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)]  mx-10">
         <input
           required
           onKeyUp={(e) => dispatch(search(e.target.value))}
-          className="h-full w-4/6   border-0 outline-0 ms-5"
+          className="h-full w-4/6   border-0 outline-0 ms-5 text-5xl"
           placeholder="Search"
           type="text"
         />

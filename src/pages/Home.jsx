@@ -47,7 +47,7 @@ const Home = () => {
   }
   // See more functionality for description 
   return (
-    <div className="space-y-8 mx-10 my-10">
+    <div className="space-y-8  my-10">
       {/* Filter */}
       <div className="flex md:flex-row flex-wrap justify-center md:justify-start items-center">
         {/* All Items */}

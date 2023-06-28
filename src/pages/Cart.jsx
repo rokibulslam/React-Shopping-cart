@@ -28,7 +28,8 @@ const Cart = () => {
   const total = parseFloat(totalWithDeci).toFixed(2)
   const sortedCart = [...cart].sort((a, b) => a.cartPosition - b.cartPosition);
   return (
-    <div className="flex flex-col  gap-5 md:ms-[100px]">
+    <div className="flex flex-col  gap-5">
+      <h1 className="text-[32px] text-darkslategray">Checkout</h1>
       {/* Cart Items */}
       {sortedCart.map((item, index) => (
         <CartItem key={index} item={item} />
@@ -65,7 +66,7 @@ const Cart = () => {
             <span>£</span>
             <span>{total}</span>
           </p>
-          <button className="h-[25px] md:h-[50px] w-[100px] md:w-[187px] rounded-lg border-0 bg-[#7FD287] text-white font-bold md:text-base">
+          <button className="h-[25px] md:h-[50px] w-[100px] md:w-[187px] rounded-lg border-0 bg-[#7FD287] text-white font-bold md:text-base hover:bg-black cursor-pointer">
             Checkout
           </button>
         </div>

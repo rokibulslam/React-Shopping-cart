@@ -2,8 +2,8 @@ import React from 'react'
 
 const CartItemDiscount = ({item}) => {
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start">
-      <div className="flex justify-around md:justify-center items-start space-x-5 flex-1 gap-x-10">
+    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start pt-5">
+      <div className="flex justify-between md:justify-center items-start flex-1 gap-x-10 px-14">
         {/* Image */}
         <img className="w-[80px] h-[80px]" src="/src/assets/mango.jpg" alt="" />
         {/* Food */}
@@ -36,10 +36,14 @@ const CartItemDiscount = ({item}) => {
             )}
           </div>
         </div>
-        <p>{item.price}</p>
+        <div className='flex justify-end'>
+          <p>{item.price}</p>
+        </div>
         {/* delete  */}
-        <div>
-          <p className="bg-dodgerblue text-white px-3 py-1 rounded-2xl text-center w-10">free</p>
+        <div className='flex justify-center'>
+          <p className="bg-dodgerblue text-white px-3 py-1 rounded-2xl text-center w-10">
+            free
+          </p>
         </div>
       </div>
     </div>
