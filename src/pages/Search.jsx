@@ -9,20 +9,6 @@ const Search = () => {
   const { data, isError, isFetching, isLoading } = useProductListQuery();
   // Search Functionalities
   let filteredData = data;
-  if (searchString) {
-    filteredData = filteredData.filter((item) => {
-      const itemName = item.name.toLowerCase();
-      const itemPrice = item.price.toLowerCase();
-      const itemDescription = item.description.toLowerCase();
-      const searchInput = searchString.toLowerCase();
-      return (
-        itemName.includes(searchInput) ||
-        itemPrice.includes(searchInput) ||
-        itemDescription.includes(searchInput)
-      );
-    });
-  }
-
   let AllData = null;
   if (isLoading || isFetching) {
     AllData = (
@@ -43,6 +29,19 @@ const Search = () => {
         ))}
       </>
     );
+  }
+  if (searchString) {
+    filteredData = filteredData?.filter((item) => {
+      const itemName = item.name.toLowerCase();
+      const itemPrice = item.price.toLowerCase();
+      const itemDescription = item.description.toLowerCase();
+      const searchInput = searchString.toLowerCase();
+      return (
+        itemName.includes(searchInput) ||
+        itemPrice.includes(searchInput) ||
+        itemDescription.includes(searchInput)
+      );
+    });
   }
   return (
     <div className="space-y-8 mx-10 my-10">
