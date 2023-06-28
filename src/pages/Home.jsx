@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <div className="space-y-8 mx-10 my-10">
       {/* Filter */}
-      <div className="flex md:flex-row flex-col justify-center md:justify-start items-center">
+      <div className="flex md:flex-row flex-wrap justify-center md:justify-start items-center">
         {/* All Items */}
         <button
           onClick={() => setCategory("all")}

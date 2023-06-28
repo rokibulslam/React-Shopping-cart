@@ -11,7 +11,7 @@ export default {
         },
         black: "#000",
         darkslategray: "#474747",
-        lightGray:"#82828B",
+        lightGray: "#82828B",
         gray: "#949494",
         salmon: {
           100: "#ff7979",
@@ -31,7 +31,7 @@ export default {
       },
       fontFamily: {
         almarai: "Almarai",
-      },  
+      },
       borderRadius: {
         "11xl": "30px",
         "81xl": "100px",
@@ -48,4 +48,5 @@ export default {
   corePlugins: {
     preflight: false,
   },
+  plugins: [require("daisyui")],
 };
