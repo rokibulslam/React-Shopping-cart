@@ -5,15 +5,19 @@ import { addToCart } from '../features/cartSlice';
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch()
   return (
-    <div className="w-[518px] h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center">
+    <div className="w-[400px] h-[300px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center">
       {/* Image Div */}
       <div>
-        <img className="h-[200px] w-[200px]" src={item.img} alt="" />
+        <img
+          className="h-[150px] w-[150px] md:h-[200px] md:w-[200px]"
+          src={item.img}
+          alt=""
+        />
       </div>
       {/* Content */}
       <div className="h-full">
         {/* header */}
-        <h3 className="font-bold text-xl my-10">{item.name}</h3>
+        <h3 className="font-bold text-xl my-5 md:my-10">{item.name}</h3>
         {/* paragraph */}
         <p className="text-base mb-20">
           {item.description.split(/\s+/).slice(0, 10).join(" ")}
@@ -41,7 +45,7 @@ const ProductCard = ({ item }) => {
           {/* Cart */}
           <div className="mr-10 space-x-4">
             <img
-              onClick={()=>dispatch(addToCart(item))}
+              onClick={() => dispatch(addToCart(item))}
               className="w-[28] h-[26] cursor-pointer"
               src="/src/assets/small-cart.png"
               alt=""

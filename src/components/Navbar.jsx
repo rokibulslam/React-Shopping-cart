@@ -6,7 +6,7 @@ const Navbar = () => {
   const cart=useSelector(state=>state.cart.cart)
   const dispatch=useDispatch()
   return (
-    <nav className=" mx-auto flex flex-wrap flex-col md:flex-row items-center py-10">
+    <nav className=" mx-auto flex flex-col md:flex-row items-center py-10 justify-center">
       {/* Name */}
       <Link
         to="/"
@@ -15,32 +15,33 @@ const Navbar = () => {
         GROCERIES
       </Link>
       {/* Search */}
-      <div className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center h-[40px] border-gray-900">
+      <div className="flex items-center text-base justify-end h-[40px] border-gray-900 lg:w-4/6 rounded-81xl shadow-lg mx-10">
         <input
           onKeyUp={(e) => dispatch(search(e.target.value))}
-          className="outline-0"
+          className="h-full w-4/6   border-0 outline-0"
           placeholder="Search"
           type="text"
         />
+        <img className="w-[20px] pr-3" src="/src/assets/search.png" alt="" />
       </div>
 
       {/* Icons */}
-      <ul className="flex items-center justify-center space-x-10 list-none">
+      <ul className="flex items-center justify-center space-x-10 list-none mt-[50px] md:mt-0">
         {/* Favourite */}
         <li className="relative">
           <img
-            className="w-[51px] h-[43px]"
+            className="w-[25px] h-[25px] md:w-[51px] md:h-[43px]"
             src="/src/assets/Icon.png"
             alt=""
           />
-          <span className="absolute right-[-15px] top-[-30px] h-[24px] w-[24px] bg-red-400 rounded-[100%] text-sm flex justify-center items-center">
+          <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-red-400 rounded-[100%] md:text-sm text-[10px] flex justify-center items-center">
             8
           </span>
         </li>
         {/* Profile */}
         <li className="relative">
           <img
-            className="w-[51px] h-[51px]"
+            className="w-[25px] h-[25px] md:w-[51px] md:h-[43px]"
             src="/src/assets/Avatar.png"
             alt=""
           />
@@ -49,11 +50,11 @@ const Navbar = () => {
         <li className="relative">
           <Link to="/cart">
             <img
-              className="w-[51px] h-[43px]"
+              className="w-[25px] h-[25px] md:w-[51px] md:h-[43px]"
               src="/src/assets/cart.png"
               alt=""
             />
-            <span className="absolute right-[-15px] top-[-30px] h-[24px] w-[24px] bg-red-400 rounded-[100%] text-sm flex justify-center items-center">
+            <span className="absolute right-[-15px] top-[-15px] md:top-[-30px] w-[12px] h-[12px] md:h-[24px] md:w-[24px] bg-red-400 rounded-[100%] md:text-sm text-[10px] flex justify-center items-center">
               {cart.length}
             </span>
           </Link>
