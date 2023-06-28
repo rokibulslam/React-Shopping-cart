@@ -11,11 +11,11 @@ const CartItem = ({item}) => {
   const Product = cart.find(product => product.id === item.id)
   const handleAddToCart = (cartItem) => {
     if (parseInt(cartItem.quantity) > parseInt(Product.available-1)) {
-      console.log(cartItem.quantity, Product.quantity);
+     
       return toast.error("You don't have enough product");
     } else {
       dispatch(addToCart(cartItem));
-      console.log("conditions");
+      
     }
     
   }

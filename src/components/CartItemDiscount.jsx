@@ -2,7 +2,7 @@ import React from 'react'
 
 const CartItemDiscount = ({item}) => {
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start pt-5">
+    <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start p-5">
       <div className="flex justify-between md:justify-center items-start flex-1 gap-x-10 px-14">
         {/* Image */}
         <img className="w-[80px] h-[80px]" src={item.img} alt="" />

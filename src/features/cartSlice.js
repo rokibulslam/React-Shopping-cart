@@ -82,8 +82,6 @@ const cartSlice = createSlice({
         }
         // if exist modify the coffee quantity
         if (quotientOfquantity > 0 && existCoffee) {
-          const coffee = { ...state.coffee, quantity: quotientOfquantity };
-          console.log(coffee);
           state.discountedProduct[0].quantity = quotientOfquantity;
         }
       }

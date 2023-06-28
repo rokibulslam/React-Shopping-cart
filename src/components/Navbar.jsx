@@ -7,8 +7,6 @@ import avator from "../assets/Avatar.png";
 import cartPic from "../assets/cart.png";
 const Navbar = () => {
   const cart = useSelector(state => state.cart.cart)
-  const searchText = useSelector((state) => state.search.searchText);
-  console.log(searchText)
   const dispatch=useDispatch()
   return (
     <nav className=" mx-auto flex flex-col lg:flex-row items-center py-10 justify-center">

@@ -4,7 +4,6 @@ const cartCounterMiddleware = (store) => (next) => (action) => {
   const cart = state.cart.cart;
 
   if (action.type === "cart/addToCart") {
-    console.log(action.type)
     const newAction = {
       ...action,
       payload: { ...action.payload, cartPosition: cart.length },

@@ -24,7 +24,6 @@ const Cart = () => {
   const discount = parseFloat(discountWithDeci).toFixed(2);
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
     // Cart Calculation
-  console.log(cart)
   const total = parseFloat(totalWithDeci).toFixed(2)
   const sortedCart = [...cart].sort((a, b) => a.cartPosition - b.cartPosition);
   return (
@@ -60,7 +59,7 @@ const Cart = () => {
         </div>
         {/* Total */}
         <div className="grid grid-cols-3 md:grid-cols-4 py-10 border-[#E6E6EB] border-x-0 border-y-[1px] border-solid">
-          <p></p>
+          <p className="hidden md:block"></p>
           <p className="font-bold text-xl ">Total</p>
           <p className="text-lightGray font-bold">
             <span>£</span>

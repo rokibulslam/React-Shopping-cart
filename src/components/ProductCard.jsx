@@ -1,12 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/cartSlice';
 import { toast } from 'react-hot-toast';
 import smallCart from '../assets/small-cart.png'
 import smallLove from '../assets/small-love.png'
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch()
-
+  
   return (
     <div className="w-[300px] h-[240px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center px-5">
       {/* Image Div */}
