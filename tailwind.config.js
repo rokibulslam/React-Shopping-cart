@@ -44,16 +44,16 @@ export default {
       xl: "20px",
       base: "16px",
     },
-    // screens: {
-    //   sm: "750px",
-    //   // => @media (min-width: 576px) { ... }
+    screens: {
+      sm: "750px",
+      // => @media (min-width: 576px) { ... }
 
-    //   md: "1200px",
-    //   // => @media (min-width: 960px) { ... }
+      md: "800px",
+      // => @media (min-width: 960px) { ... }
 
-    //   lg: "1201px",
-    //   // => @media (min-width: 1440px) { ... }
-    // },
+      lg: "1350px",
+      // => @media (min-width: 1440px) { ... }
+    },
   },
   corePlugins: {
     preflight: false,
