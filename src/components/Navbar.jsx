@@ -12,7 +12,7 @@ const Navbar = () => {
       {/* Name */}
       <Link
         to="/"
-        className="flex title-font items-center text-gray-900 mb-4 md:mb-0 no-underline text-black font-bold"
+        className="flex title-font items-center text-gray-900 mb-4 md:mb-0 no-underline text-black font-bolder"
       >
         GROCERIES
       </Link>

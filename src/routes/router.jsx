@@ -3,6 +3,7 @@ import Main from "../layout/Main";
 import Home from "../pages/Home";
 import Cart from "../pages/Cart";
 import Search from "../pages/Search";
+import Notefound from "../components/Notefound";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Search />,
       },
     ],
+  },
+  {
+    path: "*",
+    element:<Notefound />
   },
 ]);
 

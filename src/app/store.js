@@ -5,13 +5,13 @@ import cartSlice from "../features/cartSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; 
 
+// Persist for cart slice
 const cartPersistConfig = {
   key: "cart",
   storage,
 };
-
 const persistedCartReducer = persistReducer(cartPersistConfig, cartSlice);
-
+// Configure store 
 const store = configureStore({
   reducer: {
     [productApi.reducerPath]: productApi.reducer,
