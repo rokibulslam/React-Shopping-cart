@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../features/cartSlice';
 import { toast } from 'react-hot-toast';
 import smallCart from '../assets/small-cart.png'
 import smallLove from '../assets/small-love.png'
 const ProductCard = ({ item }) => {
-  const [product, setProduct]=useState({})
+  const [quantity, setQuantity] = useState()
   const dispatch = useDispatch()
-  const cart = useSelector(state=>state.cart.cart)
-  const cartProduct = cart?.find(cartItem => cartItem.id === item.id)
-  
+  const cart = useSelector(state => state.cart.cart)
+  const product = cart?.find((cartItem) => cartItem.id === item.id); 
+  const handleAddToCart = () => {
+    if (item.available - product?.quantity < 0) {
+      toast.error("You Dont have enough Product");
+      return
+    } else {
+      dispatch(addToCart(item));
+      toast.success("Added To Cart");
+    }
+  }
+  useEffect(() => {
+    setQuantity(item.available - product?.quantity);
+  },[cart, item])
   return (
     <div className="w-[300px] h-[240px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center px-5">
       {/* Image Div */}
@@ -30,11 +41,10 @@ const ProductCard = ({ item }) => {
         </p>
         {/* Quantity */}
         <div className=" w-[98px] h-6 text-sm text-white mb-8">
-          {parseFloat(item.available) - parseInt(cartProduct?.quantity) <
-          10 ? (
+          {quantity < 10 ? (
             <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px] text-white">
               <span>Only</span>
-              <span>{item.available - cartProduct.quantity}</span>
+              <span>{quantity}</span>
               <span>left</span>
             </div>
           ) : (
@@ -53,9 +63,8 @@ const ProductCard = ({ item }) => {
           <div className="md:mr-10 space-x-4">
             <img
               onClick={() => {
-                dispatch(addToCart(item));
-                toast.success("Added To Cart");
-              }}
+                handleAddToCart()
+                }}
               className="w-[18px] md:w-[28px] h-[18px] md:h-[26px] cursor-pointer"
               src={smallCart}
               alt=""
