@@ -9,7 +9,17 @@ const CartItem = ({item}) => {
   const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.cart)
   const Product = cart.find(product => product.id === item.id)
+      const discountedProducts = useSelector(
+        (state) => state.cart.discountedProduct
+      );
+      const offerProduct = discountedProducts?.find(
+        (cartItem) => cartItem.id === item.id
+      ); 
   const handleAddToCart = (cartItem) => {
+    if (Product.available - (cartItem?.quantity + offerProduct?.quantity) <= 0) {
+      toast.error("You Dont have enough Product");
+      return;
+    }
     if (cartItem.quantity > Product.available-1) {
       return toast.error("You don't have enough product");
     } else {
