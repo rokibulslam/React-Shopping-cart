@@ -83,7 +83,6 @@ const cartSlice = createSlice({
         const coffeeOnCart = state.cart.find(item => item.name === "Coffee")
         const coffeeQuantity =
           coffeeFromApi.available - (existCoffee?.quantity?? 0) - (coffeeOnCart?.quantity ?? 0)
-        console.log(coffeeQuantity, existCoffee?.quantity, coffeeOnCart?.quantity);
         // if not exist push the updated coffee
         if (quotientOfquantity > 0 && !existCoffee) {
             
@@ -100,7 +99,14 @@ const cartSlice = createSlice({
           if (coffeeQuantity <= 0) {
             return;
           } else if (coffeeQuantity >= quotientOfquantity) {
-            state.discountedProduct[0].quantity = quotientOfquantity;
+            const coffee = { ...state.coffee, quantity: quotientOfquantity };
+            console.log(quotientOfquantity)
+           state.discountedProduct = [
+             ...state.discountedProduct.filter((item) => item.id !== coffee.id),
+             coffee,
+           ];
+           
+            // state.discountedProduct[0].quantity = quotientOfquantity;
            }
           
         }
@@ -152,7 +158,11 @@ const cartSlice = createSlice({
           if (quotientOfquantity > 0) {
             state.discountedProduct[0].quantity = quotientOfquantity;
           } else if (quotientOfquantity === 0) {
-            state.discountedProduct = [];
+           const coffee = { ...state.coffee, quantity: quotientOfquantity };
+           console.log(quotientOfquantity);
+           state.discountedProduct = [
+             ...state.discountedProduct.filter((item) => item.id !== coffee.id)
+           ];
             state.discountedCoffee = 0;
           }
         }
