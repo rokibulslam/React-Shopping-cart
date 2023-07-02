@@ -5,12 +5,13 @@ import { toast } from 'react-hot-toast';
 import smallCart from '../assets/small-cart.png'
 import smallLove from '../assets/small-love.png'
 const ProductCard = ({ item }) => {
-  const [quantity, setQuantity] = useState()
+  const [quantity, setQuantity] = useState(item.available);
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cart)
   const product = cart?.find((cartItem) => cartItem.id === item.id); 
+  // handle add to cart 
   const handleAddToCart = () => {
-    if (item.available - product?.quantity < 0) {
+    if (item.available - product?.quantity <= 0) {
       toast.error("You Dont have enough Product");
       return
     } else {
@@ -18,8 +19,15 @@ const ProductCard = ({ item }) => {
       toast.success("Added To Cart");
     }
   }
+  // Check product is available on cart or not
+  // set quantity of product depend on cart/item 
   useEffect(() => {
-    setQuantity(item.available - product?.quantity);
+    if (!product?.quantity) {
+      setQuantity(item.available)
+    } else if (product.quantity) {
+      setQuantity(item.available - product?.quantity);  
+    }
+    
   },[cart, item])
   return (
     <div className="w-[300px] h-[240px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center px-5">

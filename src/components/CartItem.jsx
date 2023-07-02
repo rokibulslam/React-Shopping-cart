@@ -10,7 +10,7 @@ const CartItem = ({item}) => {
     const cart = useSelector(state => state.cart.cart)
   const Product = cart.find(product => product.id === item.id)
   const handleAddToCart = (cartItem) => {
-    if (parseInt(cartItem.quantity) > parseInt(Product.available-1)) {
+    if (cartItem.quantity > Product.available-1) {
       return toast.error("You don't have enough product");
     } else {
       dispatch(addToCart(cartItem));
