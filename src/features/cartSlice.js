@@ -8,12 +8,16 @@ const initialState = {
   discountForCocacola: 0,
   discountedCoffee: 0,
   cartTotal: 0,
+  products:[]
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    addProducts: (state, action)=>{
+      state.products=action.payload
+    },
     addCoffee: (state, action) => {
       state.coffee = action.payload;
     },
@@ -75,14 +79,30 @@ const cartSlice = createSlice({
         const existCoffee = state.discountedProduct.find(
           (product) => product.id === state.coffee.id
         );
+        const coffeeFromApi = state.products.find(item => item.name === "Coffee")
+        const coffeeOnCart = state.cart.find(item => item.name === "Coffee")
+        const coffeeQuantity =
+          coffeeFromApi.available - (existCoffee?.quantity?? 0) - (coffeeOnCart?.quantity ?? 0)
+        console.log(coffeeQuantity, existCoffee?.quantity, coffeeOnCart?.quantity);
         // if not exist push the updated coffee
         if (quotientOfquantity > 0 && !existCoffee) {
-          const coffee = { ...state.coffee, quantity: quotientOfquantity };
+            
+          if (coffeeQuantity<=0) {
+            return
+          } else if(coffeeQuantity>=quotientOfquantity){
+            const coffee = { ...state.coffee, quantity: quotientOfquantity };
           state.discountedProduct.push(coffee);
+          }
+
         }
         // if exist modify the coffee quantity
         if (quotientOfquantity > 0 && existCoffee) {
-          state.discountedProduct[0].quantity = quotientOfquantity;
+          if (coffeeQuantity <= 0) {
+            return;
+          } else if (coffeeQuantity >= quotientOfquantity) {
+            state.discountedProduct[0].quantity = quotientOfquantity;
+           }
+          
         }
       }
     },
@@ -179,6 +199,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, addCoffee, deleteFromCart } =
+export const { addToCart, removeFromCart, addCoffee, deleteFromCart, addProducts } =
   cartSlice.actions;
 export default cartSlice.reducer;

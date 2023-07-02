@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../APIs/productApi";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { addCoffee } from "../features/cartSlice";
+import { addCoffee, addProducts } from "../features/cartSlice";
 import Loader from "../components/Loader";
 
 
@@ -15,6 +15,7 @@ const Home = () => {
   });
   const dispatch= useDispatch()
   useEffect(() => {
+    dispatch(addProducts(data))
     const coffee = data?.find((item) => item.name === "Coffee");
     dispatch(addCoffee(coffee))
   },[data, isLoading, isFetching, isError])

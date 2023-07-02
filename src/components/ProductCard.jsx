@@ -8,9 +8,16 @@ const ProductCard = ({ item }) => {
   const [quantity, setQuantity] = useState(item.available);
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart.cart)
+    const discountedProducts = useSelector(state => state.cart.discountedProduct)
   const product = cart?.find((cartItem) => cartItem.id === item.id); 
+   const offerProduct = discountedProducts?.find((cartItem) => cartItem.id === item.id); 
+  
   // handle add to cart 
   const handleAddToCart = () => {
+    if ((item.available - (product?.quantity + offerProduct?.quantity)) <= 0) {
+      toast.error("You Dont have enough Product");
+      return;
+    }
     if (item.available - product?.quantity <= 0) {
       toast.error("You Dont have enough Product");
       return
@@ -19,16 +26,23 @@ const ProductCard = ({ item }) => {
       toast.success("Added To Cart");
     }
   }
+  console.log(quantity)
+
   // Check product is available on cart or not
   // set quantity of product depend on cart/item 
   useEffect(() => {
-    if (!product?.quantity) {
+    if (!product?.quantity && !offerProduct?.quantity) {
       setQuantity(item.available)
-    } else if (product.quantity) {
+    } else if (product?.quantity && !offerProduct?.quantity) {
       setQuantity(item.available - product?.quantity);  
+    } else if (!product?.quantity && offerProduct?.quantity) {
+      setQuantity(item.available - offerProduct?.quantity)
+    } else if (product?.quantity && offerProduct?.quantity) {
+      setQuantity(
+        item.available - (product?.quantity + offerProduct?.quantity)
+      );
     }
-    
-  },[cart, item])
+  }, [cart, item, offerProduct?.quantity, discountedProducts, addToCart])
   return (
     <div className="w-[300px] h-[240px] md:w-[518px] md:h-[327px] text-darkslategray shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] rounded-11xl grid grid-cols-2 items-center justify-center px-5">
       {/* Image Div */}
