@@ -6,18 +6,15 @@ import plus from "../assets/Plus.png";
 import deletePic from "../assets/delete.png";
 import { toast } from 'react-hot-toast';
 const CartItem = ({item}) => {
-    const dispatch = useDispatch()
-  const cart = useSelector(state => state.cart.cart)
+  const dispatch = useDispatch()
+    const cart = useSelector(state => state.cart.cart)
   const Product = cart.find(product => product.id === item.id)
   const handleAddToCart = (cartItem) => {
     if (parseInt(cartItem.quantity) > parseInt(Product.available-1)) {
-     
       return toast.error("You don't have enough product");
     } else {
       dispatch(addToCart(cartItem));
-      
     }
-    
   }
   return (
     <div className=" grid grid-cols-1 md:grid-cols-2 gap-y-5 items-start md:justify-items-start shadow-[5px_5px_20px_rgba(133,_133,_133,_0.2)] p-5">
@@ -56,10 +53,10 @@ const CartItem = ({item}) => {
           </div>
           {/* Remainning */}
           <div>
-            {item.available < 10 ? (
+            {item.available - item.quantity < 10 ? (
               <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px] text-white">
                 <span>Only</span>
-                <span>{item.available}</span>
+                <span>{item.available - item.quantity}</span>
                 <span>left</span>
               </div>
             ) : (
@@ -73,7 +70,7 @@ const CartItem = ({item}) => {
           <p>{item.price}</p>
         </div>
         {/* delete  */}
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           <img
             onClick={() => dispatch(deleteFromCart(item))}
             className="w-[24px] h-[24px]"

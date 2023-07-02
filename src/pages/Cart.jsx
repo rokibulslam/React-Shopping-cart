@@ -26,6 +26,8 @@ const Cart = () => {
     // Cart Calculation
   const total = parseFloat(totalWithDeci).toFixed(2)
   const sortedCart = [...cart].sort((a, b) => a.cartPosition - b.cartPosition);
+
+  
   return (
     <div className="flex flex-col  gap-5">
       <h1 className="text-[32px] text-darkslategray">Checkout</h1>
