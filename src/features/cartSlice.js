@@ -37,7 +37,7 @@ const cartSlice = createSlice({
           return accu + (parseFloat(product.price.substring(1)) * parseInt(product.quantity));
         }, 0);
         state.cartTotal = cartTotal;
-        state.subTotal=state.cartTotal+ state.discountedCoffee
+        state.subTotal=state.cartTotal+ state.discountedCoffee + state.discountForCocacola
         // if product exist first add quantity to selectedProduct
         // then remove existing product
         // push new updated selected product
@@ -54,7 +54,8 @@ const cartSlice = createSlice({
           );
         }, 0);
         state.cartTotal = cartTotal;
-        state.subTotal = state.cartTotal + state.discountedCoffee;
+        state.subTotal =
+          state.cartTotal + state.discountedCoffee + state.discountForCocacola;
       }
       // Offer for buy 6 cocacola & get 1 free   Croissants
       // check product exist in array(must)
@@ -85,7 +86,8 @@ const cartSlice = createSlice({
         const discount =
           quotientOfquantity * parseFloat(state.coffee.price.substring(1));
         state.discountedCoffee = discount;
-        state.subTotal = state.cartTotal + state.discountedCoffee
+        state.subTotal =
+          state.cartTotal + state.discountedCoffee + state.discountForCocacola;
         // insert coffee with updated quantity into discountedProducts Array
         // Check coffee existence in discountedProduct array
         const existCoffee = state.discountedProduct.find(
@@ -141,7 +143,8 @@ const cartSlice = createSlice({
           );
         }, 0);
         state.cartTotal = cartTotal;
-        state.subTotal = state.cartTotal + state.discountedCoffee;
+        state.subTotal =
+          state.cartTotal + state.discountedCoffee + state.discountForCocacola;
         // Offer for buy 6 cocacola & get 1 free
         // Check product existence in the cart
         const selectedProduct = state.cart.find(
@@ -179,12 +182,30 @@ const cartSlice = createSlice({
             quotientOfquantity * parseFloat(state.coffee.price.substring(1));
           state.discountedCoffee = discount;
           const coffee = { ...state.coffee, quantity: quotientOfquantity };
+             const coffeeFromApi = state.products.find(
+               (item) => item.name === "Coffee"
+             );
+             const coffeeOnCart = state.cart.find(
+               (item) => item.name === "Coffee"
+             );
+          const existCoffee = state.discountedProduct.find(
+            (product) => product.id === state.coffee.id
+          );
+             const coffeeQuantity =
+               coffeeFromApi.available -
+               (existCoffee?.quantity ?? 0) -
+               (coffeeOnCart?.quantity ?? 0);
           // set quotientOfquantity as coffee quantity or remove if 0
           if (quotientOfquantity > 0) {
-            state.discountedProduct = [
-              ...state.discountedProduct.filter((item) => item.id !== coffee.id),
-              coffee,
-            ];
+            if (coffeeQuantity >= quotientOfquantity) {
+              state.discountedProduct = [
+                ...state.discountedProduct.filter(
+                  (item) => item.id !== coffee.id
+                ),
+                coffee,
+              ];
+            }
+            
           } else if (quotientOfquantity === 0) {
            state.discountedProduct = [
              ...state.discountedProduct.filter((item) => item.id !== coffee.id)
@@ -204,7 +225,8 @@ const cartSlice = createSlice({
           );
         }, 0);
         state.cartTotal = cartTotal;
-        state.subTotal = state.cartTotal + state.discountedCoffee;
+        state.subTotal =
+          state.cartTotal + state.discountedCoffee + state.discountForCocacola;
       }
     },
     deleteFromCart: (state, action) => {
@@ -237,7 +259,8 @@ const cartSlice = createSlice({
         );
       }, 0);
       state.cartTotal = cartTotal;
-      state.subTotal = state.cartTotal + state.discountedCoffee;
+     state.subTotal =
+       state.cartTotal + state.discountedCoffee + state.discountForCocacola;
     },
   },
 });
