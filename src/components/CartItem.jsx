@@ -5,7 +5,8 @@ import minus from '../assets/Minus.png'
 import plus from "../assets/Plus.png";
 import deletePic from "../assets/delete.png";
 import { toast } from 'react-hot-toast';
-const CartItem = ({item}) => {
+const CartItem = ({ item }) => {
+  
   const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.cart)
   const Product = cart.find(product => product.id === item.id)
@@ -13,8 +14,9 @@ const CartItem = ({item}) => {
         (state) => state.cart.discountedProduct
       );
       const offerProduct = discountedProducts?.find(
-        (cartItem) => cartItem.id === item.id
-      ); 
+        (offerItem) => offerItem.id === item.id
+  ); 
+  console.log(offerProduct)
   const handleAddToCart = (cartItem) => {
     if (Product.available - (cartItem?.quantity + offerProduct?.quantity) <= 0) {
       toast.error("You Dont have enough Product");
@@ -24,6 +26,7 @@ const CartItem = ({item}) => {
       return toast.error("You don't have enough product");
     } else {
       dispatch(addToCart(cartItem));
+
     }
   }
   return (
@@ -63,10 +66,14 @@ const CartItem = ({item}) => {
           </div>
           {/* Remainning */}
           <div>
-            {item.available - item.quantity < 10 ? (
+            {(item.available - (item.quantity + (offerProduct?.quantity ?? 0))) <
+            10 ? (
               <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px] text-white">
                 <span>Only</span>
-                <span>{item.available - item.quantity}</span>
+                <span>
+                  {item.available -
+                    (item.quantity + (offerProduct?.quantity ?? 0))}
+                </span>
                 <span>left</span>
               </div>
             ) : (

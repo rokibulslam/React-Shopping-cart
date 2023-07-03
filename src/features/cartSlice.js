@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   coffee: {},
+  coke:{},
   cart: [],
   subTotal: 0,
   discountedProduct: [],
@@ -64,6 +65,17 @@ const cartSlice = createSlice({
         const discount =
           quotientOfquantity * parseFloat(selectedProduct.price.substring(1));
         state.discountForCocacola = discount;
+        const coke = state.products.find(item => item.name === "Coca-Cola")
+        const existCoke = state.discountedProduct.find(item => item.id === coke.id)
+        const newCoke = { ...coke, quantity: quotientOfquantity };
+        if (!existCoke && (quotientOfquantity > 0)) {
+          state.discountedProduct.push(newCoke);
+        } else if (existCoke && quotientOfquantity > 0) {
+          state.discountedProduct = [
+            ...state.discountedProduct.filter((item) => item.id !== coke.id),
+            newCoke,
+          ];
+        }
       }
       // Offer for buy 3  & get 1 free coffee
       // check product Croissants must exist in cart
@@ -100,7 +112,6 @@ const cartSlice = createSlice({
             return;
           } else if (coffeeQuantity >= quotientOfquantity) {
             const coffee = { ...state.coffee, quantity: quotientOfquantity };
-            console.log(quotientOfquantity)
            state.discountedProduct = [
              ...state.discountedProduct.filter((item) => item.id !== coffee.id),
              coffee,
@@ -141,10 +152,25 @@ const cartSlice = createSlice({
         // selected product must be Coca-Cola
         if (selectedProduct && selectedProduct.name === "Coca-Cola") {
           // Discount of Cocacola
+          const quotientOfquantity = Math.floor(selectedProduct.quantity / 6);
           const discount =
-            Math.floor(selectedProduct.quantity / 6) *
+            quotientOfquantity *
             parseFloat(selectedProduct.price.substring(1));
           state.discountForCocacola = discount;
+           const coke = state.products.find(
+             (item) => item.name === "Coca-Cola"
+           );
+           const newCoke = { ...coke, quantity: quotientOfquantity };
+           if (quotientOfquantity>0) {
+             state.discountedProduct = [
+               ...state.discountedProduct.filter((item) => item.id !== coke.id), newCoke
+             ];
+           } else if(quotientOfquantity===0) {
+             state.discountedProduct = [
+               ...state.discountedProduct.filter((item) => item.id !== coke.id)
+             ];
+             state.discountForCocacola = 0;
+           }
         }
         // Offer for buy 3  & get 1 free coffee
         // selected product must be Croissants
@@ -154,12 +180,14 @@ const cartSlice = createSlice({
           const discount =
             quotientOfquantity * parseFloat(state.coffee.price.substring(1));
           state.discountedCoffee = discount;
+          const coffee = { ...state.coffee, quantity: quotientOfquantity };
           // set quotientOfquantity as coffee quantity or remove if 0
           if (quotientOfquantity > 0) {
-            state.discountedProduct[0].quantity = quotientOfquantity;
+            state.discountedProduct = [
+              ...state.discountedProduct.filter((item) => item.id !== coffee.id),
+              coffee,
+            ];
           } else if (quotientOfquantity === 0) {
-           const coffee = { ...state.coffee, quantity: quotientOfquantity };
-           console.log(quotientOfquantity);
            state.discountedProduct = [
              ...state.discountedProduct.filter((item) => item.id !== coffee.id)
            ];
@@ -188,11 +216,18 @@ const cartSlice = createSlice({
       );
       // For Cocacola modify discount
       if (action.payload.name === "Coca-Cola") {
+        const coke = state.discountedProduct.find(
+          (item) => item.name === "Coca-Cola"
+        );
+        state.discountedProduct = [
+          ...state.discountedProduct.filter((item) => item.id !== coke.id),
+        ];
         state.discountForCocacola = 0;
       }
       // For Croissants empty the discounted product array
       if (action.payload.name === "Croissants") {
-        state.discountedProduct = [];
+        const coffee= state.discountedProduct.find(item=>item.name==="Coffee")
+        state.discountedProduct = [...state.discountedProduct.filter((item) => item.id !== coffee.id)];
         state.discountedCoffee = 0;
       }
       // Cart Total
