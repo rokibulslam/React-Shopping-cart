@@ -16,7 +16,6 @@ const CartItem = ({ item }) => {
       const offerProduct = discountedProducts?.find(
         (offerItem) => offerItem.id === item.id
   ); 
-  console.log(offerProduct)
   const handleAddToCart = (cartItem) => {
     if (Product.available - (cartItem?.quantity + offerProduct?.quantity) <= 0) {
       toast.error("You Dont have enough Product");

@@ -22,7 +22,7 @@ const Cart = () => {
   const discountWithDeci = discountForCocaCola + discountCoffee;
   const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
   const discount = parseFloat(discountWithDeci).toFixed(2);
-  console.log(subTotal, discount)
+  
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
     // Cart Calculation
   const total = parseFloat(totalWithDeci).toFixed(2)

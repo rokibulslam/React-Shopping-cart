@@ -23,17 +23,7 @@ const CartItemDiscount = ({item}) => {
           </div>
           {/* Remainning */}
           <div>
-            {item.available < 10 ? (
-              <div className=" rounded-3xs bg-coral-200 shadow-[5px_5px_20px_rgba(255,_210,_178,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-coral-100 flex justify-center items-center gap-x-[3px] text-[14px] text-white">
-                <span>Only</span>
-                <span>{item.available}</span>
-                <span>left</span>
-              </div>
-            ) : (
-              <div className=" rounded-3xs bg-limegreen-200 shadow-[5px_5px_20px_rgba(196,_255,_202,_0.5)] box-border w-[99px] h-[25px] border-[1px] border-solid border-limegreen-100 flex justify-center items-center gap-x-[3px] text-[14px] text-white">
-                <span>{`Available`}</span>
-              </div>
-            )}
+            
           </div>
         </div>
         <div className='flex justify-end'>

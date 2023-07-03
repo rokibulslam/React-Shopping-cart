@@ -26,7 +26,7 @@ const ProductCard = ({ item }) => {
       toast.success("Added To Cart");
     }
   }
-  console.log(quantity)
+
 
   // Check product is available on cart or not
   // set quantity of product depend on cart/item 
