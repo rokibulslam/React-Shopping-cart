@@ -89,9 +89,9 @@ const cartSlice = createSlice({
       if (selectedProduct && selectedProduct.name === "Croissants") {
         // Calculation for discounted coffee
         const quotientOfquantity = Math.floor(selectedProduct.quantity / 3);
-        const discount =
-          quotientOfquantity * parseFloat(state.coffee.price.substring(1));
-        state.discountedCoffee = discount;
+        // const discount =
+        //   quotientOfquantity * parseFloat(state.coffee.price.substring(1));
+        // state.discountedCoffee = discount;
         state.subTotal =
           state.cartTotal + state.discountedCoffee + state.discountForCocacola;
         // insert coffee with updated quantity into discountedProducts Array
@@ -114,6 +114,12 @@ const cartSlice = createSlice({
           } else if (coffeeQuantity >= quotientOfquantity) {
             const coffee = { ...state.coffee, quantity: quotientOfquantity };
             state.discountedProduct.push(coffee);
+            const updatedCoffee = state.discountedProduct.find(
+              (item) => item.name === "Coffee"
+            );
+            const updateDiscount =
+              updatedCoffee.price.substring(1) * updatedCoffee.quantity;
+            state.discountedCoffee = updateDiscount;
           }
         }
         // if exist modify the coffee quantity
@@ -128,6 +134,10 @@ const cartSlice = createSlice({
               ),
               coffee,
             ];
+            const updatedCoffee = state.discountedProduct.find(item => item.name === "Coffee")
+            const updateDiscount = updatedCoffee.price.substring(1) * updatedCoffee.quantity
+            state.discountedCoffee=updateDiscount
+           
           }
         }
       }
