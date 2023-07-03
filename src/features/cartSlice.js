@@ -116,8 +116,6 @@ const cartSlice = createSlice({
              ...state.discountedProduct.filter((item) => item.id !== coffee.id),
              coffee,
            ];
-           
-            // state.discountedProduct[0].quantity = quotientOfquantity;
            }
           
         }

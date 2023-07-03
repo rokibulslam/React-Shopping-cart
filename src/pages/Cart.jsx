@@ -18,10 +18,11 @@ const Cart = () => {
     (state) => state.cart.discountForCocacola
   );
   // toFixed(2)
-  const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee);
+  const subTotalWithDeci = parseFloat(cartTotal) + parseFloat(discountCoffee) + parseFloat(discountForCocaCola);
   const discountWithDeci = discountForCocaCola + discountCoffee;
   const subTotal = parseFloat(subTotalWithDeci).toFixed(2);
   const discount = parseFloat(discountWithDeci).toFixed(2);
+  console.log(subTotal, discount)
   const totalWithDeci = parseFloat(subTotal) - parseFloat(discount);
     // Cart Calculation
   const total = parseFloat(totalWithDeci).toFixed(2)
