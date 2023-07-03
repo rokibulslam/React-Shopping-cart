@@ -120,7 +120,7 @@ const cartSlice = createSlice({
         if (quotientOfquantity > 0 && existCoffee) {
           if (coffeeQuantity <= 0) {
             return;
-          } else if (coffeeQuantity >= quotientOfquantity) {
+          } else if (coffeeQuantity + existCoffee.quantity >= quotientOfquantity) {
             const coffee = { ...state.coffee, quantity: quotientOfquantity };
             state.discountedProduct = [
               ...state.discountedProduct.filter(
@@ -204,12 +204,14 @@ const cartSlice = createSlice({
             (coffeeOnCart?.quantity ?? 0);
           // set quotientOfquantity as coffee quantity or remove if 0
           if (quotientOfquantity > 0) {
-            if (coffeeQuantity >= quotientOfquantity) {
+            console.log(quotientOfquantity)
+            if ((coffeeQuantity + existCoffee?.quantity) >= quotientOfquantity) {
+              const ncoffee = { ...state.coffee, quantity: quotientOfquantity };
               state.discountedProduct = [
                 ...state.discountedProduct.filter(
                   (item) => item.id !== coffee.id
                 ),
-                coffee,
+                ncoffee,
               ];
             }
           } else if (quotientOfquantity === 0) {
