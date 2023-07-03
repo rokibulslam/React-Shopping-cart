@@ -2,22 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   coffee: {},
-  coke:{},
+  coke: {},
   cart: [],
   subTotal: 0,
   discountedProduct: [],
   discountForCocacola: 0,
   discountedCoffee: 0,
   cartTotal: 0,
-  products:[]
+  products: [],
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProducts: (state, action)=>{
-      state.products=action.payload
+    addProducts: (state, action) => {
+      state.products = action.payload;
     },
     addCoffee: (state, action) => {
       state.coffee = action.payload;
@@ -34,10 +34,14 @@ const cartSlice = createSlice({
         state.cart.push(product);
         // Set Cart Total
         const cartTotal = state.cart.reduce((accu, product) => {
-          return accu + (parseFloat(product.price.substring(1)) * parseInt(product.quantity));
+          return (
+            accu +
+            parseFloat(product.price.substring(1)) * parseInt(product.quantity)
+          );
         }, 0);
         state.cartTotal = cartTotal;
-        state.subTotal=state.cartTotal+ state.discountedCoffee + state.discountForCocacola
+        state.subTotal =
+          state.cartTotal + state.discountedCoffee + state.discountForCocacola;
         // if product exist first add quantity to selectedProduct
         // then remove existing product
         // push new updated selected product
@@ -66,10 +70,12 @@ const cartSlice = createSlice({
         const discount =
           quotientOfquantity * parseFloat(selectedProduct.price.substring(1));
         state.discountForCocacola = discount;
-        const coke = state.products.find(item => item.name === "Coca-Cola")
-        const existCoke = state.discountedProduct.find(item => item.id === coke.id)
+        const coke = state.products.find((item) => item.name === "Coca-Cola");
+        const existCoke = state.discountedProduct.find(
+          (item) => item.id === coke.id
+        );
         const newCoke = { ...coke, quantity: quotientOfquantity };
-        if (!existCoke && (quotientOfquantity > 0)) {
+        if (!existCoke && quotientOfquantity > 0) {
           state.discountedProduct.push(newCoke);
         } else if (existCoke && quotientOfquantity > 0) {
           state.discountedProduct = [
@@ -93,20 +99,22 @@ const cartSlice = createSlice({
         const existCoffee = state.discountedProduct.find(
           (product) => product.id === state.coffee.id
         );
-        const coffeeFromApi = state.products.find(item => item.name === "Coffee")
-        const coffeeOnCart = state.cart.find(item => item.name === "Coffee")
+        const coffeeFromApi = state.products.find(
+          (item) => item.name === "Coffee"
+        );
+        const coffeeOnCart = state.cart.find((item) => item.name === "Coffee");
         const coffeeQuantity =
-          coffeeFromApi.available - (existCoffee?.quantity?? 0) - (coffeeOnCart?.quantity ?? 0)
+          coffeeFromApi.available -
+          (existCoffee?.quantity ?? 0) -
+          (coffeeOnCart?.quantity ?? 0);
         // if not exist push the updated coffee
         if (quotientOfquantity > 0 && !existCoffee) {
-            
-          if (coffeeQuantity<=0) {
-            return
-          } else if(coffeeQuantity>=quotientOfquantity){
+          if (coffeeQuantity <= 0) {
+            return;
+          } else if (coffeeQuantity >= quotientOfquantity) {
             const coffee = { ...state.coffee, quantity: quotientOfquantity };
-          state.discountedProduct.push(coffee);
+            state.discountedProduct.push(coffee);
           }
-
         }
         // if exist modify the coffee quantity
         if (quotientOfquantity > 0 && existCoffee) {
@@ -114,12 +122,13 @@ const cartSlice = createSlice({
             return;
           } else if (coffeeQuantity >= quotientOfquantity) {
             const coffee = { ...state.coffee, quantity: quotientOfquantity };
-           state.discountedProduct = [
-             ...state.discountedProduct.filter((item) => item.id !== coffee.id),
-             coffee,
-           ];
-           }
-          
+            state.discountedProduct = [
+              ...state.discountedProduct.filter(
+                (item) => item.id !== coffee.id
+              ),
+              coffee,
+            ];
+          }
         }
       }
     },
@@ -155,23 +164,21 @@ const cartSlice = createSlice({
           // Discount of Cocacola
           const quotientOfquantity = Math.floor(selectedProduct.quantity / 6);
           const discount =
-            quotientOfquantity *
-            parseFloat(selectedProduct.price.substring(1));
+            quotientOfquantity * parseFloat(selectedProduct.price.substring(1));
           state.discountForCocacola = discount;
-           const coke = state.products.find(
-             (item) => item.name === "Coca-Cola"
-           );
-           const newCoke = { ...coke, quantity: quotientOfquantity };
-           if (quotientOfquantity>0) {
-             state.discountedProduct = [
-               ...state.discountedProduct.filter((item) => item.id !== coke.id), newCoke
-             ];
-           } else if(quotientOfquantity===0) {
-             state.discountedProduct = [
-               ...state.discountedProduct.filter((item) => item.id !== coke.id)
-             ];
-             state.discountForCocacola = 0;
-           }
+          const coke = state.products.find((item) => item.name === "Coca-Cola");
+          const newCoke = { ...coke, quantity: quotientOfquantity };
+          if (quotientOfquantity > 0) {
+            state.discountedProduct = [
+              ...state.discountedProduct.filter((item) => item.id !== coke.id),
+              newCoke,
+            ];
+          } else if (quotientOfquantity === 0) {
+            state.discountedProduct = [
+              ...state.discountedProduct.filter((item) => item.id !== coke.id),
+            ];
+            state.discountForCocacola = 0;
+          }
         }
         // Offer for buy 3  & get 1 free coffee
         // selected product must be Croissants
@@ -182,19 +189,19 @@ const cartSlice = createSlice({
             quotientOfquantity * parseFloat(state.coffee.price.substring(1));
           state.discountedCoffee = discount;
           const coffee = { ...state.coffee, quantity: quotientOfquantity };
-             const coffeeFromApi = state.products.find(
-               (item) => item.name === "Coffee"
-             );
-             const coffeeOnCart = state.cart.find(
-               (item) => item.name === "Coffee"
-             );
+          const coffeeFromApi = state.products.find(
+            (item) => item.name === "Coffee"
+          );
+          const coffeeOnCart = state.cart.find(
+            (item) => item.name === "Coffee"
+          );
           const existCoffee = state.discountedProduct.find(
             (product) => product.id === state.coffee.id
           );
-             const coffeeQuantity =
-               coffeeFromApi.available -
-               (existCoffee?.quantity ?? 0) -
-               (coffeeOnCart?.quantity ?? 0);
+          const coffeeQuantity =
+            coffeeFromApi.available -
+            (existCoffee?.quantity ?? 0) -
+            (coffeeOnCart?.quantity ?? 0);
           // set quotientOfquantity as coffee quantity or remove if 0
           if (quotientOfquantity > 0) {
             if (coffeeQuantity >= quotientOfquantity) {
@@ -205,11 +212,12 @@ const cartSlice = createSlice({
                 coffee,
               ];
             }
-            
           } else if (quotientOfquantity === 0) {
-           state.discountedProduct = [
-             ...state.discountedProduct.filter((item) => item.id !== coffee.id)
-           ];
+            state.discountedProduct = [
+              ...state.discountedProduct.filter(
+                (item) => item.id !== coffee.id
+              ),
+            ];
             state.discountedCoffee = 0;
           }
         }
@@ -246,8 +254,12 @@ const cartSlice = createSlice({
       }
       // For Croissants empty the discounted product array
       if (action.payload.name === "Croissants") {
-        const coffee= state.discountedProduct.find(item=>item.name==="Coffee")
-        state.discountedProduct = [...state.discountedProduct.filter((item) => item.id !== coffee.id)];
+        const coffee = state.discountedProduct.find(
+          (item) => item.name === "Coffee"
+        );
+        state.discountedProduct = [
+          ...state.discountedProduct.filter((item) => item.id !== coffee.id),
+        ];
         state.discountedCoffee = 0;
       }
       // Cart Total
@@ -259,12 +271,17 @@ const cartSlice = createSlice({
         );
       }, 0);
       state.cartTotal = cartTotal;
-     state.subTotal =
-       state.cartTotal + state.discountedCoffee + state.discountForCocacola;
+      state.subTotal =
+        state.cartTotal + state.discountedCoffee + state.discountForCocacola;
     },
   },
 });
 
-export const { addToCart, removeFromCart, addCoffee, deleteFromCart, addProducts } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  addCoffee,
+  deleteFromCart,
+  addProducts,
+} = cartSlice.actions;
 export default cartSlice.reducer;
